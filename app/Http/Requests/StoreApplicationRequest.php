@@ -24,6 +24,7 @@ class StoreApplicationRequest extends FormRequest
     {
         return [
             'name' => 'required',
+            'slug' => 'required|regex:/^[a-z0-9\-]+$/|unique:applications',
             'url' => 'required|url',
         ];
     }

@@ -16,8 +16,11 @@ class ApplicationFactory extends Factory
      */
     public function definition(): array
     {
+        $name = fake()->unique()->company();
+
         return [
-            'name' => fake()->company(),
+            'name' => $name,
+            'slug' => str($name)->slug(),
             'url' => fake()->url(),
         ];
     }

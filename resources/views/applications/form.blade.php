@@ -17,6 +17,12 @@
 
         <input id="name" name="name" value="{{ old('name', $application->name ?? '' )}}" required />
 
+        <label for="slug">
+            {{ __('Slug') }}
+        </label>
+
+        <input id="slug" name="slug" value="{{ old('slug', $application->slug ?? '' )}}" required />
+
         <label for="url">
             {{ __('Url') }}
         </label>

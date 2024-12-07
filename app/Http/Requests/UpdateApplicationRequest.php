@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateApplicationRequest extends FormRequest
 {
@@ -22,8 +23,11 @@ class UpdateApplicationRequest extends FormRequest
      */
     public function rules(): array
     {
+        $application = request()->application;
+
         return [
             'name' => 'required',
+            'slug' => ['required', 'regex:/^[a-z0-9\-]+$/', Rule::unique('applications')->ignore($application->id)],
             'url' => 'required|url',
         ];
     }

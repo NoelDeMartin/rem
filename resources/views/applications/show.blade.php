@@ -4,9 +4,16 @@
         {{ $application->name }}
     </h2>
 
-    <code>{{ $application->url }}</code>
-
-    <br>
+    <table>
+        <tr>
+            <th>Slug</th>
+            <td>{{ $application->slug }}</td>
+        </tr>
+        <tr>
+            <th>Url</th>
+            <td><a href="{{ $application->url }}" target="_blank">{{ $application->url }}</a></td>
+        </tr>
+    </table>
 
     <a href="{{ route('applications.edit', $application) }}">{{ __('Edit') }}</a>
 

@@ -29,6 +29,11 @@ class ApplicationController extends Controller
 
     public function show(Application $application)
     {
+        if (request()->wantsJsonLD()) {
+            return response($application->profileDocument())
+                ->withHeaders(['Content-Type' => 'application/ld+json']);
+        }
+
         return view('applications.show', compact('application'));
     }
 
