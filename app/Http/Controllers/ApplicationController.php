@@ -30,7 +30,9 @@ class ApplicationController extends Controller
     public function show(Application $application)
     {
         if (request()->wantsJsonLD()) {
-            return response($application->profileDocument())
+            $context = request()->header('JsonLdContext');
+
+            return response($application->profileDocument(compact('context')))
                 ->withHeaders(['Content-Type' => 'application/ld+json']);
         }
 

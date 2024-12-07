@@ -26,8 +26,9 @@ class UpdateApplicationRequest extends FormRequest
         $application = request()->application;
 
         return [
-            'name' => 'required',
             'slug' => ['required', 'regex:/^[a-z0-9\-]+$/', Rule::unique('applications')->ignore($application->id)],
+            'name' => 'required',
+            'description' => 'required',
             'url' => 'required|url',
         ];
     }

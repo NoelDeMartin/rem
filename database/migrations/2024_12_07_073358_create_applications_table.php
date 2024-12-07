@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->string('slug')->unique();
+            $table->string('name');
+            $table->text('description');
             $table->string('url');
             $table->timestamps();
         });

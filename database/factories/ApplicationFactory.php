@@ -19,8 +19,9 @@ class ApplicationFactory extends Factory
         $name = fake()->unique()->company();
 
         return [
-            'name' => $name,
             'slug' => str($name)->slug(),
+            'name' => $name,
+            'description' => fake()->text(),
             'url' => fake()->url(),
         ];
     }

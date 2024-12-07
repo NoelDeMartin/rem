@@ -23,8 +23,9 @@ class StoreApplicationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
             'slug' => 'required|regex:/^[a-z0-9\-]+$/|unique:applications',
+            'name' => 'required',
+            'description' => 'required',
             'url' => 'required|url',
         ];
     }

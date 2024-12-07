@@ -11,23 +11,29 @@
         @csrf
         @method(isset($application) ? 'patch' : 'post')
 
-        <label for="name">
-            {{ __('Name') }}
-        </label>
-
-        <input id="name" name="name" value="{{ old('name', $application->name ?? '' )}}" required />
-
         <label for="slug">
             {{ __('Slug') }}
         </label>
 
-        <input id="slug" name="slug" value="{{ old('slug', $application->slug ?? '' )}}" required />
+        <input id="slug" name="slug" value="{{ old('slug', $application->slug ?? '') }}" required />
+
+        <label for="name">
+            {{ __('Name') }}
+        </label>
+
+        <input id="name" name="name" value="{{ old('name', $application->name ?? '') }}" required />
+
+        <label for="description">
+            {{ __('Description') }}
+        </label>
+
+        <textarea id="description" name="description" required rows="6">{{ old('description', $application->description ?? '') }}</textarea>
 
         <label for="url">
             {{ __('Url') }}
         </label>
 
-        <input id="url" name="url" value="{{ old('url', $application->url ?? '' )}}" required />
+        <input id="url" name="url" value="{{ old('url', $application->url ?? '') }}" required />
 
         @if ($errors->any())
             <ul>
@@ -40,7 +46,7 @@
         <br>
 
         <button>
-            {{ __('Create') }}
+            {{ isset($application) ? __('Save') : __('Create') }}
         </button>
 
     </form>

@@ -4,6 +4,8 @@
         {{ $application->name }}
     </h2>
 
+    <p>{{ $application->description }}</p>
+
     <table>
         <tr>
             <th>Slug</th>

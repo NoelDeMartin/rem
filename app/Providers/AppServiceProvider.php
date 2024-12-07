@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Request::macro('wantsJsonLD', function ()  {
-            return request()->header('accept') === 'application/ld+json';
+            return request()->header('Accept') === 'application/ld+json';
         });
     }
 }
