@@ -1,30 +1,46 @@
-<x-applications-layout>
+<x-app-layout>
+    <div>
+        <div class="px-4 sm:px-0">
+          <h1 class="text-base/7 font-semibold text-gray-900">{{ $application->name }}</h1>
+          <p class="mt-1 max-w-2xl text-sm/6 text-gray-500">{{ $application->description }}</p>
+        </div>
+        <div class="mt-6 border-t border-gray-100">
+            <dl class="divide-y divide-gray-100">
+                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                    <dt class="text-sm/6 font-medium text-gray-900">{{ __('Slug') }}</dt>
+                    <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+                        <code>{{ $application->slug }}</code>
+                    </dd>
+                </div>
+                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                    <dt class="text-sm/6 font-medium text-gray-900">{{ __('Url') }}</dt>
+                    <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+                        <a href="{{ $application->url }}" target="_blank">{{ $application->url }}</a>
+                    </dd>
+                </div>
+            </dl>
+        </div>
+    </div>
 
-    <h2>
-        {{ $application->name }}
-    </h2>
+    <div class="mt-4 flex space-x-2">
+        <a
+            href="{{ route('applications.edit', $application) }}"
+            class="items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+            {{ __('Edit') }}
+        </a>
 
-    <p>{{ $application->description }}</p>
+        {{-- TODO confirm --}}
+        <form method="POST" action="{{ route('applications.destroy', $application) }}">
+            @csrf
+            @method('delete')
+            <button
+                type="submit"
+                class="items-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+            >
+                {{ __('Delete') }}
+            </button>
+        </form>
+    </div>
 
-    <table>
-        <tr>
-            <th>Slug</th>
-            <td>{{ $application->slug }}</td>
-        </tr>
-        <tr>
-            <th>Url</th>
-            <td><a href="{{ $application->url }}" target="_blank">{{ $application->url }}</a></td>
-        </tr>
-    </table>
-
-    <a href="{{ route('applications.edit', $application) }}">{{ __('Edit') }}</a>
-
-    {{-- TODO confirm --}}
-    <form method="POST" action="{{ route('applications.destroy', $application) }}">
-        @csrf
-        @method('delete')
-
-        <button>{{ __('Delete') }}</button>
-    </form>
-
-</x-applications-layout>
+</x-app-layout>
