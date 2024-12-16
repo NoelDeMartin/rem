@@ -43,6 +43,9 @@
                                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         {{ __('Slug') }}
                                     </th>
+                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                        {{ __('Models') }}
+                                    </th>
                                     <th scope="col" class="relative py-3.5 pr-4 pl-3 sm:pr-0">
                                         <span class="sr-only">
                                             {{ __('Edit') }}
@@ -60,6 +63,13 @@
                                         </td>
                                         <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500">
                                             {{ $application->slug }}
+                                        </td>
+                                        <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500">
+                                            @if ($application->models->isEmpty())
+                                                -
+                                            @else
+                                                {{ $application->models->map(fn ($model) => $model->name)->join(', ') }}
+                                            @endif
                                         </td>
                                         <td class="relative py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-0">
                                             <a href="{{ route('applications.edit', $application) }}" class="text-indigo-600 hover:text-indigo-900">

@@ -27,6 +27,8 @@ class StoreApplicationRequest extends FormRequest
             'name' => 'required',
             'description' => 'required',
             'url' => 'required|url',
+            'models.*.name' => 'required',
+            'models.*.url' => 'required|url',
         ];
     }
 }

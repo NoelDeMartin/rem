@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -20,8 +20,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Request::macro('wantsJsonLD', function ()  {
-            return request()->header('Accept') === 'application/ld+json';
+        Carbon::macro('toJSString', function () {
+            return $this->format('Y-m-d\TH:i:s\Z');
         });
     }
 }

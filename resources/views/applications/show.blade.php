@@ -18,6 +18,23 @@
                         <a href="{{ $application->url }}" target="_blank">{{ $application->url }}</a>
                     </dd>
                 </div>
+                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                    <dt class="text-sm/6 font-medium text-gray-900">{{ __('Models') }}</dt>
+                    <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+                        @if ($application->models->isEmpty())
+                            -
+                        @else
+                            <ul class="list-disc space-y-2">
+                                @foreach ($application->models as $model)
+                                    <li>
+                                        {{ $model->name }} <br>
+                                        <code class="text-xs">{{ $model->url }}</code>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
+                    </dd>
+                </div>
             </dl>
         </div>
     </div>
