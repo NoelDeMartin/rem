@@ -8,8 +8,7 @@ RUN set -x \
     && apk add zlib-dev libzip-dev \
     && docker-php-ext-install zip bcmath \
     && docker-php-ext-enable bcmath \
-    && php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
-    && composer self-update --1
+    && php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer
 
 # Install Supervisor
 RUN apk add --no-cache supervisor
