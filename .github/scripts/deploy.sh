@@ -10,6 +10,7 @@ git clone https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY
 rm headless/* -rf
 rm deployment/Dockerfile
 cp deployment/* headless/ -r
+cp deployment/.env.example headless/
 
 if [[ -z `git -C headless status --short` ]]; then
     echo "No changes to apply!"
