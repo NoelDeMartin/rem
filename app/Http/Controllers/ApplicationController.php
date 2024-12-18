@@ -6,6 +6,7 @@ use App\Http\Requests\StoreApplicationRequest;
 use App\Http\Requests\UpdateApplicationRequest;
 use App\Models\Application;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Intervention\Image\Laravel\Facades\Image;
 
 class ApplicationController extends Controller
@@ -142,6 +143,8 @@ class ApplicationController extends Controller
 
             return;
         }
+
+        File::ensureDirectoryExists(storage_path('app/public/img/applications'));
 
         Image::read(request()->file('logo'))
             ->cover(512, 512)
