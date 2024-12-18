@@ -52,8 +52,11 @@
             {{ __('Edit') }}
         </a>
 
-        {{-- TODO confirm --}}
-        <form method="POST" action="{{ route('applications.destroy', $application) }}">
+        <form
+            method="POST"
+            action="{{ route('applications.destroy', $application) }}"
+            onsubmit="return confirm('{{ __('Are you sure you want to delete this app?') }}')"
+        >
             @csrf
             @method('delete')
             <button

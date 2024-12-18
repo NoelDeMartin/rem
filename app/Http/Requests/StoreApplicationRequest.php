@@ -12,7 +12,6 @@ class StoreApplicationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        // TODO auth policies
         return true;
     }
 

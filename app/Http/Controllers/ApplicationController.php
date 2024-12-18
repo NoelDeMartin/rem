@@ -116,8 +116,6 @@ class ApplicationController extends Controller
 
     public function destroy(Application $application)
     {
-        // TODO auth policies
-
         $application->delete();
 
         return redirect()->route('applications.index');
