@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('name');
             $table->text('description');
+            $table->boolean('has_logo')->default(false);
             $table->string('url');
             $table->timestamps();
         });

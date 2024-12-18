@@ -19,7 +19,7 @@
 
         <title>{{ config('app.name') }}</title>
 
-        <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+        <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
         <script src="//unpkg.com/alpinejs" defer></script>
     </head>
 

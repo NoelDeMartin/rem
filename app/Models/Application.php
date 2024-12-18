@@ -11,11 +11,17 @@ class Application extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['slug', 'name', 'description', 'url'];
+    protected $fillable = ['slug', 'name', 'description', 'has_logo', 'url'];
 
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function getLogoUrlAttribute(): string {
+        return $this->has_logo
+            ? url("img/applications/{$this->slug}.png")
+            : url("img/default-application.png");
     }
 
     public function models(): HasMany {
@@ -147,6 +153,7 @@ class Application extends Model
                 'client_name' => $this->name,
                 'client_uri' => $this->url,
                 'grant_types' => ['refresh_token', 'authorization_code'],
+                'logo_uri' => $this->logo_url,
                 'redirect_uris' => [
                     '@none' => [$this->url],
                 ],
@@ -163,6 +170,7 @@ class Application extends Model
                 ],
                 'http://www.w3.org/ns/solid/interop#applicationDescription' => $this->description,
                 'http://www.w3.org/ns/solid/interop#applicationName' => $this->name,
+                'http://www.w3.org/ns/solid/interop#applicationThumbnail' => $this->logo_url,
                 'http://www.w3.org/ns/solid/interop#hasAccessDescriptionSet' => [
                     ['client_id' => route('jsonld.applications.access-description-set', $this)],
                 ],
@@ -187,6 +195,7 @@ class Application extends Model
             'dc:modified' => $this->updated_at->toJSString(),
             'interop:applicationDescription' => $this->description,
             'interop:applicationName' => $this->name,
+            'interop:applicationThumbnail' => $this->logo_url,
             'interop:hasAccessDescriptionSet' => [
                 route('jsonld.applications.access-description-set', $this),
             ],
@@ -195,6 +204,7 @@ class Application extends Model
             'oidc:client_uri' => $this->url,
             'oidc:default_max_age' => 3600,
             'oidc:grant_types' => ['refresh_token', 'authorization_code'],
+            'oidc:logo_uri' => $this->logo_url,
             'oidc:redirect_uris' => [$this->url],
             'oidc:require_auth_time' => true,
             'oidc:response_types' => 'code',

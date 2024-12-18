@@ -41,9 +41,6 @@
                                         {{ __('Name') }}
                                     </th>
                                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        {{ __('Slug') }}
-                                    </th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         {{ __('Models') }}
                                     </th>
                                     <th scope="col" class="relative py-3.5 pr-4 pl-3 sm:pr-0">
@@ -56,19 +53,31 @@
                             <tbody class="divide-y divide-gray-200">
                                 @foreach ($applications as $application)
                                     <tr>
-                                        <td class="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-0">
-                                            <a href="{{ route('applications.show', $application) }}">
-                                                {{ $application->name }}
+                                        <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
+                                            <a class="flex items-center" href="{{ route('applications.show', $application) }}">
+                                                <div class="size-11 shrink-0">
+                                                    <img src="{{ $application->logo_url }}" class="size-11 rounded border border-gray-100" alt="">
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="font-medium text-gray-900">{{ $application->name }}</div>
+                                                    <div class="mt-1 text-gray-500">{{ $application->slug }}</div>
+                                                </div>
                                             </a>
-                                        </td>
-                                        <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500">
-                                            {{ $application->slug }}
                                         </td>
                                         <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500">
                                             @if ($application->models->isEmpty())
                                                 -
                                             @else
-                                                {{ $application->models->map(fn ($model) => $model->name)->join(', ') }}
+                                                <div class="prose">
+                                                    <ul>
+                                                        @foreach ($application->models as $model)
+                                                            <li>
+                                                                <p class="mb-0">{{ $model->name }}</p>
+                                                                <p class="text-xs mt-0">{{ $model->url }}</p>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
                                             @endif
                                         </td>
                                         <td class="relative py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-0">

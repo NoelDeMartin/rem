@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\File;
 
 class StoreApplicationRequest extends FormRequest
 {
@@ -29,6 +30,8 @@ class StoreApplicationRequest extends FormRequest
             'url' => 'required|url',
             'models.*.name' => 'required',
             'models.*.url' => 'required|url',
+            'logo' => File::image(['png', 'jpeg'])->max('5mb'),
+            'logo_clear' => 'nullable|boolean',
         ];
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Requests\StoreApplicationRequest;
 use App\Http\Requests\UpdateApplicationRequest;
 use App\Models\Application;
 use Illuminate\Support\Facades\DB;
+use Intervention\Image\Laravel\Facades\Image;
 
 class ApplicationController extends Controller
 {
@@ -24,8 +25,12 @@ class ApplicationController extends Controller
     public function store(StoreApplicationRequest $request)
     {
         $application = DB::transaction(function () use ($request) {
-            $application = Application::create($request->validated());
+            $application = new Application($request->validated());
             $models = $request->validated('models') ?? [];
+
+            $this->updateApplicationLogo($application, $request->has('logo_clear'));
+
+            $application->save();
 
             foreach ($models as $model) {
                 $application->models()->create($model);
@@ -74,7 +79,7 @@ class ApplicationController extends Controller
     public function update(UpdateApplicationRequest $request, Application $application)
     {
         DB::transaction(function () use ($request, $application) {
-            $application->update($request->validated());
+            $application->fill($request->validated());
             $newModels = collect($request->validated('models') ?? [])->keyBy('name');
             $oldModels = $application->models->keyBy('name');
 
@@ -92,6 +97,17 @@ class ApplicationController extends Controller
             foreach ($oldModels as $oldModel) {
                 $oldModel->delete();
             }
+
+            if ($application->isDirty('slug')) {
+                rename(
+                    storage_path("app/public/img/applications/{$application->getOriginal('slug')}.png"),
+                    storage_path("app/public/img/applications/{$application->slug}.png")
+                );
+            }
+
+            $this->updateApplicationLogo($application, $request->has('logo_clear'));
+
+            $application->save();
         });
 
         return redirect()->route('applications.show', $application);
@@ -104,5 +120,34 @@ class ApplicationController extends Controller
         $application->delete();
 
         return redirect()->route('applications.index');
+    }
+
+    protected function updateApplicationLogo(Application $application, bool $clear)
+    {
+        if ($clear) {
+            unlink(storage_path("app/public/img/applications/{$application->slug}.png"));
+
+            $application->setAttribute('has_logo', false);
+
+            return;
+        }
+
+        if (!request()->has('logo')) {
+            return;
+        }
+
+
+        if (!request()->file('logo')->isValid()) {
+            $application->setAttribute('has_logo', false);
+
+            return;
+        }
+
+        Image::read(request()->file('logo'))
+            ->cover(512, 512)
+            ->toPng()
+            ->save(storage_path("app/public/img/applications/{$application->slug}.png"));
+
+        $application->setAttribute('has_logo', true);
     }
 }

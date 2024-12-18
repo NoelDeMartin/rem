@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\File;
 
 class UpdateApplicationRequest extends FormRequest
 {
@@ -32,6 +33,8 @@ class UpdateApplicationRequest extends FormRequest
             'url' => 'required|url',
             'models.*.name' => 'required',
             'models.*.url' => 'required|url',
+            'logo' => File::image(['png', 'jpeg'])->max('5mb'),
+            'logo_clear' => 'nullable|boolean',
         ];
     }
 }

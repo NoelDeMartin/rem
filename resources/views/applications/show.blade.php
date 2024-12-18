@@ -1,8 +1,13 @@
 <x-app-layout>
     <div>
-        <div class="px-4 sm:px-0">
-          <h1 class="text-base/7 font-semibold text-gray-900">{{ $application->name }}</h1>
-          <p class="mt-1 max-w-2xl text-sm/6 text-gray-500">{{ $application->description }}</p>
+        <div class="px-4 sm:px-0 flex items-center space-x-2">
+            <div class="size-16 shrink-0">
+                <img src="{{ $application->logo_url }}" class="size-16 rounded border border-gray-100" alt="">
+            </div>
+            <div>
+                <h1 class="text-base/7 font-semibold text-gray-900">{{ $application->name }}</h1>
+                <p class="mt-1 max-w-2xl text-sm/6 text-gray-500">{{ $application->description }}</p>
+            </div>
         </div>
         <div class="mt-6 border-t border-gray-100">
             <dl class="divide-y divide-gray-100">

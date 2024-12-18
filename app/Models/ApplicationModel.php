@@ -31,6 +31,7 @@ class ApplicationModel extends Model
                 'http://activitypods.org/ns/core#describedClass' => [
                     'client_id' => $this->url,
                 ],
+                'http://activitypods.org/ns/core#icon' => $this->application->logo_url,
                 'http://activitypods.org/ns/core#labelPredicate' => [
                     'client_id' => 'https://www.w3.org/ns/activitystreams#name',
                 ],
@@ -55,6 +56,7 @@ class ApplicationModel extends Model
             'id' => route('jsonld.applications.models.class-description', [$this->application, $this]),
             'apods:describedBy' => route('jsonld.applications.profile', $this->application),
             'apods:describedClass' => $this->url,
+            'apods:icon' => $this->application->logo_url,
             'apods:labelPredicate' => 'as:name',
             'dc:created' => $this->created_at->toJSString(),
             'dc:modified' => $this->updated_at->toJSString(),
