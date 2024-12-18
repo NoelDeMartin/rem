@@ -14,7 +14,7 @@ RUN set -x \
 # Install Supervisor
 RUN apk add --no-cache supervisor
 
-COPY docker/supervisord.conf /etc/supervisord.conf
+COPY deployment/supervisord.conf /etc/supervisord.conf
 
 # Copy files
 COPY . /app
