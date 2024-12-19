@@ -16,8 +16,7 @@ RUN apk add --no-cache supervisor
 # Copy files
 COPY deployment/supervisord.conf /etc/supervisord.conf
 RUN rm deployment -rf
-COPY . /app
-RUN chmod 775 database
+COPY --chown www-data:root . /app
 
 # Install Composer dependencies
 RUN composer install --no-dev
