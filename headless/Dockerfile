@@ -14,8 +14,8 @@ RUN set -x \
 RUN apk add --no-cache supervisor
 
 # Copy files
-COPY deployment/supervisord.conf /etc/supervisord.conf
-RUN rm deployment -rf
+COPY headless/supervisord.conf /etc/supervisord.conf
+RUN rm headless -rf
 COPY --chown="www-data:root" . /app
 
 # Install Composer dependencies
