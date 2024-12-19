@@ -17,7 +17,7 @@
             <div
                 class="mt-2 flex items-center gap-x-3"
                 x-data="{
-                    logoUrl: '{{ $application->logo_url }}',
+                    logoUrl: '{{ $application->logo_url ?? '/img/default-application.png' }}',
                     clear() {
                         this.$refs.fileInput.value = null;
                         this.$refs.clearInput.name = 'logo_clear';
@@ -26,7 +26,7 @@
                     update() {
                         if (!this.$refs.fileInput.files.length) {
                             this.$refs.fileInput.value = null;
-                            this.logoUrl = '{{ $application->logo_url }}';
+                            this.logoUrl = '{{ $application->logo_url ?? '/img/default-application.png' }}';
 
                             return;
                         }
