@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function rem-docker-compose() {
-    docker-compose -f $base_dir/docker-compose.yml $@
+    docker compose -f $base_dir/docker-compose.yml $@
 }
 
 function rem-cli() {
