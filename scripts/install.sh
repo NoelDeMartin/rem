@@ -77,6 +77,7 @@ sed "s/fastcgi_pass app:9000/fastcgi_pass rem:9000/g" -i "$base_dir/nginx-agora/
 sed s/\\[\\[APP_DOMAIN\\]\\]/$APP_DOMAIN/g -i "$base_dir/nginx-agora/$APP_DOMAIN.conf"
 
 nginx-agora install "$base_dir/nginx-agora/$APP_DOMAIN.conf" "$base_dir/public" rem
+nginx-agora enable rem
 
 # Prepare database
 touch database/database.sqlite
@@ -89,6 +90,6 @@ rem-docker-compose run app php artisan event:cache
 rem-docker-compose run app php artisan optimize
 rem-docker-compose run app php artisan route:cache
 rem-docker-compose run app php artisan view:cache
-rem-docker-compose run app php artisan migrate
+rem-docker-compose run app php artisan migrate --force
 
 echo "Installed successfully!"
