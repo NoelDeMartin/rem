@@ -11,6 +11,7 @@ rm headless/* -rf
 rm deployment/Dockerfile
 cp deployment/* headless/ -r
 cp deployment/.env.example headless/
+cp storage/ deployment/ -r
 
 if [[ -z `git -C headless status --short` ]]; then
     echo "No changes to apply!"

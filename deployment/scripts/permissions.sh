@@ -15,3 +15,4 @@ if [ -z $WWWDATA_UID ]; then
 fi
 
 sudo chown -R $WWWDATA_UID:docker storage
+sudo chown -R $WWWDATA_UID:docker database

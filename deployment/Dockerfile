@@ -13,10 +13,11 @@ RUN set -x \
 # Install Supervisor
 RUN apk add --no-cache supervisor
 
-COPY deployment/supervisord.conf /etc/supervisord.conf
-
 # Copy files
+COPY deployment/supervisord.conf /etc/supervisord.conf
+RUN rm deployment -rf
 COPY . /app
+RUN chmod 775 database
 
 # Install Composer dependencies
 RUN composer install --no-dev
