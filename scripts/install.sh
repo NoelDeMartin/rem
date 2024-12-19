@@ -79,10 +79,10 @@ sed s/\\[\\[APP_DOMAIN\\]\\]/$APP_DOMAIN/g -i "$base_dir/nginx-agora/$APP_DOMAIN
 nginx-agora install "$base_dir/nginx-agora/$APP_DOMAIN.conf" "$base_dir/public" rem
 
 # Prepare database
-touch database/database.sql
+touch database/database.sqlite
 
 # Prepare storage
-rem-cli chown
+rem-cli permissions
 rem-docker-compose run app php artisan key:generate
 rem-docker-compose run app php artisan config:cache
 rem-docker-compose run app php artisan event:cache

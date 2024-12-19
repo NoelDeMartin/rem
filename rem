@@ -29,7 +29,7 @@ case "$command" in
         echo 'rem restart          | restart app services'
         echo 'rem stop             | stop app services'
         echo 'rem update           | update app and restart'
-        echo 'rem chown            | set permissions for storage'
+        echo 'rem permissions      | set file permissions'
         echo 'rem publish-assets   | publish assets into /public folder'
         echo 'rem shell {service?} | open shell in a running container'
         echo 'rem docker-compose   | run docker-compose command'
@@ -44,7 +44,7 @@ case "$command" in
     'docker-compose' )
         rem-docker-compose ${@:2}
         ;;
-    'install' | 'start' | 'update' | 'chown' | 'publish-assets' | 'shell' )
+    'install' | 'start' | 'update' | 'permissions' | 'publish-assets' | 'shell' )
         $scripts_dir/$command.sh ${@:2}
         ;;
     * )
