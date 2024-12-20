@@ -101,8 +101,8 @@ class ApplicationController extends Controller
 
             if ($application->isDirty('slug')) {
                 rename(
-                    storage_path("app/public/img/applications/{$application->getOriginal('slug')}.png"),
-                    storage_path("app/public/img/applications/{$application->slug}.png")
+                    storage_path("app/public/images/applications/{$application->getOriginal('slug')}.png"),
+                    storage_path("app/public/images/applications/{$application->slug}.png")
                 );
             }
 
@@ -124,7 +124,7 @@ class ApplicationController extends Controller
     protected function updateApplicationLogo(Application $application, bool $clear)
     {
         if ($clear) {
-            unlink(storage_path("app/public/img/applications/{$application->slug}.png"));
+            unlink(storage_path("app/public/images/applications/{$application->slug}.png"));
 
             $application->setAttribute('has_logo', false);
 
@@ -142,12 +142,12 @@ class ApplicationController extends Controller
             return;
         }
 
-        File::ensureDirectoryExists(storage_path('app/public/img/applications'));
+        File::ensureDirectoryExists(storage_path('app/public/images/applications'));
 
         Image::read(request()->file('logo'))
             ->cover(512, 512)
             ->toPng()
-            ->save(storage_path("app/public/img/applications/{$application->slug}.png"));
+            ->save(storage_path("app/public/images/applications/{$application->slug}.png"));
 
         $application->setAttribute('has_logo', true);
     }

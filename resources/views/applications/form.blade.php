@@ -17,16 +17,16 @@
             <div
                 class="mt-2 flex items-center gap-x-3"
                 x-data="{
-                    logoUrl: '{{ $application->logo_url ?? '/img/default-application.png' }}',
+                    logoUrl: '{{ $application->logo_url ?? '/images/default-application.png' }}',
                     clear() {
                         this.$refs.fileInput.value = null;
                         this.$refs.clearInput.name = 'logo_clear';
-                        this.logoUrl = '/img/default-application.png';
+                        this.logoUrl = '/images/default-application.png';
                     },
                     update() {
                         if (!this.$refs.fileInput.files.length) {
                             this.$refs.fileInput.value = null;
-                            this.logoUrl = '{{ $application->logo_url ?? '/img/default-application.png' }}';
+                            this.logoUrl = '{{ $application->logo_url ?? '/images/default-application.png' }}';
 
                             return;
                         }

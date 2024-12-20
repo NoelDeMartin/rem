@@ -20,8 +20,8 @@ class Application extends Model
 
     public function getLogoUrlAttribute(): string {
         return $this->has_logo
-            ? url("img/applications/{$this->slug}.png")
-            : url("img/default-application.png");
+            ? url("images/applications/{$this->slug}.png")
+            : url('images/default-application.png');
     }
 
     public function models(): HasMany {
