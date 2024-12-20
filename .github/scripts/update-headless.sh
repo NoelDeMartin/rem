@@ -10,6 +10,7 @@ git clone https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY
 rm headless-gh/* -rf
 rm headless/Dockerfile
 cp headless/* headless-gh/ -r
+cp headless/.gitignore headless-gh/
 cp headless/.env.example headless-gh/
 cp storage/ headless-gh/ -r
 

@@ -7,4 +7,3 @@ if [[ $(type -t rem-cli) != function ]]; then
 fi
 
 rem-docker-compose up -d
-rem-cli publish-assets
