@@ -5,7 +5,7 @@ WORKDIR /app
 # Install PHP dependencies
 RUN set -x \
     && apk update \
-    && apk add zlib-dev libzip-dev libpng-dev libjpeg-dev \
+    && apk add zlib-dev libzip-dev libpng-dev libjpeg-turbo-dev \
     && docker-php-ext-configure gd --with-png-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install zip bcmath gd \
     && docker-php-ext-enable bcmath \
