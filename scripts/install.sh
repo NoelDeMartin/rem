@@ -84,12 +84,12 @@ touch database/database.sqlite
 
 # Prepare storage
 rem-cli permissions
-rem-docker-compose run app php artisan key:generate
-rem-docker-compose run app php artisan config:cache
-rem-docker-compose run app php artisan event:cache
-rem-docker-compose run app php artisan optimize
-rem-docker-compose run app php artisan route:cache
-rem-docker-compose run app php artisan view:cache
-rem-docker-compose run app php artisan migrate --force
+rem-docker-compose run --rm app php artisan key:generate
+rem-docker-compose run --rm app php artisan config:cache
+rem-docker-compose run --rm app php artisan event:cache
+rem-docker-compose run --rm app php artisan optimize
+rem-docker-compose run --rm app php artisan route:cache
+rem-docker-compose run --rm app php artisan view:cache
+rem-docker-compose run --rm app php artisan migrate --force
 
 echo "Installed successfully!"
