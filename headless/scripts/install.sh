@@ -37,10 +37,6 @@ fi
 trap "clean_up" ERR
 
 function clean_up() {
-    if [ -d "$base_dir/public" ]; then
-        rm $base_dir/public -rf
-    fi
-
     if [ -d "$base_dir/nginx-agora" ]; then
         rm $base_dir/nginx-agora -rf
     fi
@@ -61,11 +57,6 @@ ESCAPED_APP_URL=$(printf '%s\n' "$APP_URL" | sed -e 's/[\/&]/\\&/g')
 
 cp .env.example .env
 sed s/APP_URL=/APP_URL=$ESCAPED_APP_URL/g -i .env
-
-# Prepare assets
-if [[ ! -d "$base_dir/public" ]]; then
-    mkdir "$base_dir/public"
-fi
 
 # Prepare nginx-agora
 APP_DOMAIN=$(echo $APP_URL | sed -E s/https?:\\/\\///g)
