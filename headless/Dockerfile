@@ -6,7 +6,7 @@ WORKDIR /app
 RUN set -x \
     && apk update \
     && apk add zlib-dev libzip-dev libpng-dev libjpeg-turbo-dev \
-    && docker-php-ext-configure gd --with-png-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-configure gd --with-jpeg \
     && docker-php-ext-install zip bcmath gd \
     && docker-php-ext-enable bcmath \
     && php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer
