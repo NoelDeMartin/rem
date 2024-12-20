@@ -76,7 +76,7 @@ sed "s/root \\/var\\/www\\/html/root \\/var\\/www\\/rem/g" -i "$base_dir/nginx-a
 sed "s/fastcgi_pass app:9000/fastcgi_pass rem:9000/g" -i "$base_dir/nginx-agora/$APP_DOMAIN.conf"
 sed s/\\[\\[APP_DOMAIN\\]\\]/$APP_DOMAIN/g -i "$base_dir/nginx-agora/$APP_DOMAIN.conf"
 
-nginx-agora install "$base_dir/nginx-agora/$APP_DOMAIN.conf" "$base_dir/public" rem
+nginx-agora install "$base_dir/nginx-agora/$APP_DOMAIN.conf" "$base_dir" rem
 nginx-agora enable rem
 
 # Prepare database
