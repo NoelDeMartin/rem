@@ -17,4 +17,3 @@ containername=`docker ps --filter "id=$containerid" --format="{{.Names}}"`
 
 rm $base_dir/public/* -rf
 docker cp "$containername:/app/public/." "$base_dir/public"
-ln -s "$base_dir/storage/app/public/img/applications" "$base_dir/public/img/applications"

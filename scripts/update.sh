@@ -25,12 +25,20 @@ if rem_is_running; then
     rem-docker-compose exec app php artisan optimize
     rem-docker-compose exec app php artisan route:cache
     rem-docker-compose exec app php artisan view:cache
+    rem-docker-compose exec app php artisan storage:unlink
+    rem-docker-compose exec app php artisan storage:link --relative
+    rem-docker-compose exec app php artisan migrate
 else
     rem-docker-compose run app php artisan config:cache
     rem-docker-compose run app php artisan event:cache
     rem-docker-compose run app php artisan optimize
     rem-docker-compose run app php artisan route:cache
     rem-docker-compose run app php artisan view:cache
+    rem-docker-compose run app php artisan storage:unlink
+    rem-docker-compose run app php artisan storage:link --relative
+    rem-docker-compose run app php artisan migrate
 fi
+
+rem-cli publish-assets
 
 echo "Updated successfully!"
