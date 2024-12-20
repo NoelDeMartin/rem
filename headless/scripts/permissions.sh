@@ -6,7 +6,7 @@ if [[ $(type -t rem-cli) != function ]]; then
     exit;
 fi
 
-WWWDATA_UID=`rem-docker-compose run app id -u www-data | tail -n 1 | sed 's/\r$//'`
+WWWDATA_UID=`rem-docker-compose run --rm app id -u www-data | tail -n 1 | sed 's/\r$//'`
 
 if [ -z $WWWDATA_UID ]; then
     echo "Could not set permissions"
