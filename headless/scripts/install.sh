@@ -90,8 +90,6 @@ rem-docker-compose run app php artisan event:cache
 rem-docker-compose run app php artisan optimize
 rem-docker-compose run app php artisan route:cache
 rem-docker-compose run app php artisan view:cache
-rem-docker-compose run app php artisan storage:link --relative
 rem-docker-compose run app php artisan migrate --force
-rem-cli publish-assets
 
 echo "Installed successfully!"
