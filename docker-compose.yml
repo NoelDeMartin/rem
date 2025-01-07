@@ -5,6 +5,7 @@ services:
             - ./database/database.sqlite:/app/database/database.sqlite
             - ./storage:/app/storage
             - ./.env:/app/.env
+        restart: unless-stopped
         networks:
             default:
                 aliases:
