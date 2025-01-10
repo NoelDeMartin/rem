@@ -22,4 +22,7 @@ php artisan serve --host=localhost
 git clone https://github.com/NoelDeMartin/rem.git rem --branch headless
 cd rem
 ./rem install
+./rem permissions
+./rem start
+nginx-agora start
 ```
